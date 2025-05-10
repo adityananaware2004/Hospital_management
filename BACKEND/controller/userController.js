@@ -127,7 +127,7 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const logoutAdmin =catchAsyncErrors(async (req, res, next) => {
- res.status(200).cookies("adminToken", null , {
+ res.status(201).cookies("adminToken", null , {
   httpOnly:true,
   expires:new Date(Date.now()),
  })
