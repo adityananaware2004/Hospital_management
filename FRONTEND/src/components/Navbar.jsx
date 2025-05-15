@@ -29,9 +29,14 @@ const Navbar = () => {
     navigateTo("/login");
   };
 
+  const goToSignUp = () => {
+    navigateTo("/register");
+  };
+
+
   return (
     <>
-      <nav className={"container"}>
+      <nav className={"container"} style={{backgroundColor:"#f3eeee" , borderBottom:"1px solid #b6afaf"  }}>
         <div className="logo">
           <img src="/logo.png" alt="logo" className="logo-img" />
         </div>
@@ -46,16 +51,26 @@ const Navbar = () => {
             <Link to={"/about"} onClick={() => setShow(!show)}>
               About Us
             </Link>
+            
           </div>
-          {isAuthenticated ? (
-            <button className="logoutBtn btn" onClick={handleLogout}>
-              LOGOUT
-            </button>
-          ) : (
-            <button className="loginBtn btn" onClick={goToLogin}>
-              LOGIN
-            </button>
-          )}
+
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            {!isAuthenticated && (
+              <>
+                <button className="loginBtn btn" onClick={goToSignUp}>
+                  SIGN UP
+                </button>
+                <button className="loginBtn btn" onClick={goToLogin}>
+                  LOGIN
+                </button>
+              </>
+            )}
+            {isAuthenticated && (
+              <button className="logoutBtn btn" onClick={handleLogout}>
+                LOGOUT
+              </button>
+            )}
+          </div>
         </div>
         <div className="hamburger" onClick={() => setShow(!show)}>
           <GiHamburgerMenu />

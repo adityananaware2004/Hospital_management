@@ -1,12 +1,13 @@
 import express from 'express';
-import { patientRegister, login ,addNewAdmin , getAllDoctors , addNewDoctor, getUserDetails , logoutPatient, logoutAdmin } from '../controller/userController.js';
+import { patientRegister, login , AdminRegister , addNewAdmin , getAllDoctors , addNewDoctor, getUserDetails , logoutPatient, logoutAdmin } from '../controller/userController.js';
 import {
     isAdminAuthenticated,
     isPatientAuthenticated,
   } from "../middlewares/auth.js";
 const router = express.Router();
 
-router.post("/patient/register", patientRegister); // Correct function name
+router.post("/patient/register", patientRegister);
+router.post("/admin/register" , AdminRegister) // Correct function name
 router.post("/login", login);
 router.post("/admin/addnew", isAdminAuthenticated,  addNewAdmin);
 router.get("/doctors", getAllDoctors);

@@ -20,6 +20,8 @@ function Register() {
   
   const navigateTo = useNavigate();
 
+  
+
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
@@ -59,13 +61,10 @@ function Register() {
 
   return (
     <>
-       <div className="container form-component register-form">
+       <div className="container form-component register-form"  style={{backgroundColor:"rgb(228 228 228)", marginTop:"123px"}}>
         <h2>Sign Up</h2>
         <p>Please Sign Up To Continue</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa
-          voluptas expedita itaque ex, totam ad quod error?
-        </p>
+        
         <form onSubmit={handleRegistration}>
           <div>
             <input
@@ -131,13 +130,13 @@ function Register() {
           >
             <p style={{ marginBottom: 0 }}>Already Registered?</p>
             <Link
-              to={"/signin"}
+              to={"/login"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
               Login Now
             </Link>
           </div>
-          <div style={{ justifyContent: "center", alignItems: "center" }}>
+          <div style={{ justifyContent: "center", alignItems: "center" , paddingBottom:"0px"}}>
             <button type="submit">Register</button>
           </div>
         </form>

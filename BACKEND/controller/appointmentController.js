@@ -125,3 +125,20 @@ export const deleteAppointment = catchAsyncErrors(async (req, res, next) => {
     message: "Appointment Deleted!",
   });
 });
+
+const getUserAppointments = catchAsyncErrors(async (req, res, next) => {
+  if (!req.user?._id) {
+    return next(new ErrorHandler("User not authenticated", 401));
+  }
+
+  const appointments = await Appointment.find({ patientId: req.user._id })
+    .sort({ appointment_date: -1 });
+
+  res.status(200).json({
+    success: true,
+    appointments
+  });
+});
+
+export default getUserAppointments;
+

@@ -1,25 +1,25 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../main";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
   const navigateTo = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axios
+        await axios
         .post(
           "http://localhost:5000/api/v1/user/login",
-          { email, password, confirmPassword, role: "Patient" },
+          { email, password, confirmPassword, role:"Admin" },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ const Login = () => {
           setConfirmPassword("");
         });
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
+      toast.error(error.response.data.message);
     }
   };
 
@@ -44,21 +44,20 @@ const Login = () => {
 
   return (
     <>
-      <div className="container form-component login-form" style={{backgroundColor:"rgb(228 228 228)", marginTop:"123px"}}>
-        <h2>Welcome Back</h2>
-        <p>Please Login To Continue</p>
-        
+      <section className="container form-component">
+        <img src="/logo.png" alt="logo" className="logo" />
+        <h1 className="form-title">WELCOME TO ZEECARE</h1>
+        <p>Only Admins Are Allowed To Access These Resources!</p>
         <form onSubmit={handleLogin}>
           <input
             type="text"
-            placeholder="Email*"
-  
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
-            placeholder="Password*"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -68,20 +67,11 @@ const Login = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <div
-            style={{
-              gap: "10px",
-              justifyContent: "flex-end",
-              flexDirection: "row",
-            }}
-          >
-            
-          </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
             <button type="submit">Login</button>
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 };
